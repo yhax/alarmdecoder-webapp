@@ -54,6 +54,7 @@ from ..zones import Zone
 from ..upnp import UPNP
 from sh import hostname, sudo
 from ..exporter import Exporter
+from ..handlerexporter import HandlerExporter
 
 try:
     from sh import service
@@ -472,6 +473,15 @@ def _get_cpu_temperature():
         return cpu_temperature_string
     else:
         return 'not supported'
+
+@settings.route('/generate_device_handler', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def generate_device_handler():
+    handler_exporter = HandlerExporter()
+
+    handler_exporter.modifyHandler()
+    return handler_exporter.ReturnResponse()
 
 @settings.route('/configure_exports', methods=['GET', 'POST'])
 @login_required

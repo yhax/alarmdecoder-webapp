@@ -365,7 +365,8 @@ def _build_zone_data(zone, short=False):
     ret = {
         'zone_id': zone.zone_id,
         'name': zone.name,
-        'description': zone.description
+        'description': zone.description,
+        "st_id": zone.st_id
     }
 
     return ret

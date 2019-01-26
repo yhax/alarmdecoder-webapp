@@ -13,6 +13,7 @@ class Zone(db.Model):
     zone_id = Column(db.Integer, unique=True, nullable=False)
     name = Column(db.String(32), nullable=False)
     description = Column(db.String(255))
+    st_id = Column(db.Integer, unique=True, nullable=True) #smart things id
 
     @classmethod
     def get_name(cls, id):

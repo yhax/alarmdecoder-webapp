@@ -20,10 +20,13 @@ zones = Blueprint('zones', __name__, url_prefix='/settings/zones')
 @login_required
 @admin_required
 def index():
-    zones = Zone.query.all()
     panel_mode = Setting.get_by_name('panel_mode').value
-
     use_ssl = Setting.get_by_name('use_ssl', default=False).value
+
+    try:
+        zones = Zone.query.all()
+    except:
+        return render_template('zones/index.html', zones=None, active="zones", ssl=use_ssl, panel_mode=panel_mode)
 
     return render_template('zones/index.html', zones=zones, active="zones", ssl=use_ssl, panel_mode=panel_mode)
 
